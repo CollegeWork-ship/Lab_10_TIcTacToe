@@ -10,6 +10,8 @@ public class TicTacToe {
         Scanner input = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         String player;
+        int moveCnt = 0;
+        int MOVES_TO_WIN = 4;
         int row;
         int col;
         boolean finished;
@@ -29,16 +31,20 @@ public class TicTacToe {
                     row--; col--;
                 }while(!isValidMove(row, col));
                 board[row][col] = player;
+                moveCnt++;
+                System.out.println("move count: " + moveCnt);
+                if(moveCnt >= MOVES_TO_WIN){
+                    if (isWin(player)) {
+                        printBoard();
+                        System.out.println("Congratulations! You win!");
+                        playing = false;
+                    }
+                }
                 if(player.equals("X")){
                     player = "O";
                 }
                 else {
                     player = "X";
-                }
-                if(isWin(player)){
-                    printBoard();
-                    System.out.println("Congratulations! You win!");
-                    playing = false;
                 }
                 if(isTie()){
                     printBoard();
